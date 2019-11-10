@@ -1,3 +1,5 @@
+rootProject.name = "exercism-kotlin"
+
 fun loadAllExercises() {
     File(".").listFiles()
         .asSequence()
