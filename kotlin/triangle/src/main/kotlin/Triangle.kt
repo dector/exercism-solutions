@@ -1,8 +1,26 @@
-class Triangle<out T : Number>(val a: T, val b: T, val c: T) {
+class Triangle(a: Double, b: Double, c: Double) {
 
-    // TODO: Implement proper constructor
+    constructor(a: Int, b: Int, c: Int) : this(a.toDouble(), b.toDouble(), c.toDouble())
 
-    val isEquilateral: Boolean = TODO("Implement this getter to complete the task")
-    val isIsosceles: Boolean = TODO("Implement this getter to complete the task")
-    val isScalene: Boolean = TODO("Implement this getter to complete the task")
+    private val sides = listOf(a, b, c)
+
+    init {
+        require(sides.all { it > 0 })
+        require(sides.areTriangle())
+    }
+
+    val isEquilateral: Boolean =
+        sides.distinct().size == 1
+
+    val isIsosceles: Boolean =
+        sides.distinct().size <= 2
+
+    val isScalene: Boolean =
+        sides.distinct().size == 3
+}
+
+private fun List<Double>.areTriangle(): Boolean {
+    val max = max() ?: return false
+
+    return (this - max).sum() >= max
 }
