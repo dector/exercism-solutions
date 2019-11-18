@@ -1,6 +1,14 @@
 object Pangram {
 
+    private val alphabet = ('a'..'z').toSet()
+
     fun isPangram(input: String): Boolean {
-        TODO("Implement this function to complete the task")
+        val normalizedInput = input
+            .toLowerCase()
+            .filter(Char::isLetter)
+
+        return alphabet
+            .minus(normalizedInput.asIterable())
+            .isEmpty()
     }
 }
